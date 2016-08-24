@@ -13,6 +13,10 @@
     <packaging>jar</packaging>
 
     <dependencies>
+    	<dependency>
+            <groupId>com.tengfei.attendance</groupId>
+            <artifactId>attendance-model</artifactId>
+        </dependency>
         <!-- Mybatis dependecies -->
         <dependency>
             <groupId>commons-dbcp</groupId>
