@@ -15,6 +15,7 @@
 	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd 
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd">
 	
-	<import resource="classpath*:spring/*.xml" />
-    <import resource="classpath*:jdbc.xml" />
+	<import resource="classpath:jdbc.xml" />
+	<import resource="classpath:security/*.xml" />
+	<import resource="classpath:spring-config.xml" />
 </beans>

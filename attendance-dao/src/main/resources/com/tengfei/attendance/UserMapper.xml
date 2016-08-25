@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tengfei.attendance.dao.UserDao">
+   <!-- 自定义返回结果集 -->
+   <resultMap id="userMap" type="org.springframework.security.core.userdetails.User">
+        <result property="username" column="username" javaType="java.lang.String"></result>
+        <result property="password" column="password" javaType="java.lang.String"></result>
+        <result property="enabled" column="enabled"></result>
+    </resultMap>
+    
+    <select id="pagerUser" resultMap="userMap">
+      select username, password, enabled from user
+      where username = #{username}
+    </select>
+        
+</mapper>

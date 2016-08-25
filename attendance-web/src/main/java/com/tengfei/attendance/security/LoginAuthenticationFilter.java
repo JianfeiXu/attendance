@@ -45,7 +45,7 @@ public class LoginAuthenticationFilter extends AbstractAuthenticationProcessingF
     private AuthenticationFailureHandler failureHandler = null;
     
     public LoginAuthenticationFilter() {
-        super("/login.action");
+        super("/login.do");
     }
     
     /**

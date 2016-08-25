@@ -54,7 +54,11 @@ public class ResourcesSecurityInterceptor extends AbstractSecurityInterceptor im
     }  
       
     public void destroy() {  
-    }  
+    }
+    
+    public void afterPropertiesSet() throws Exception {
+        logger.debug("Validated configuration attributes");
+    }
   
     @Override  
     public Class<? extends Object> getSecureObjectClass() {  

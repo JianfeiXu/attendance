@@ -7,13 +7,17 @@
   
   <context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:spring-parent.xml</param-value>
+		<param-value>classpath:spring-parent.xml</param-value>
 	</context-param>
 
 	<!-- Spring 容器加载 -->
 	<listener>
 		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
 	</listener>
+	
+	<listener>  
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
+    </listener>  
 
 	<!-- Enables use of HTTP methods PUT and DELETE,默认参数名: _method -->
 	<filter>
@@ -59,7 +63,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath*:spring/spring-mvc.xml</param-value>
+			<param-value>classpath:spring-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -67,11 +71,15 @@
 	<!-- Map all *.spring requests to the DispatcherServlet for handling -->
 	<servlet-mapping>
 		<servlet-name>SpringMVCDispatcherServlet</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
+  
+  	<welcome-file-list>
+  		<welcome-file>index.html</welcome-file>
+  	</welcome-file-list>
   
 </web-app>

@@ -42,17 +42,13 @@
 
 	<!-- 验证成功处理 -->
 	<bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">  
-	    <property name="defaultTargetUrl" value="/indexAction.action" />  
+	    <property name="defaultTargetUrl" value="/logon.do" />  
 	</bean> 
 	
 	<!-- 登录验证切入点 -->
 	<bean id="loginAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<property name="loginFormUrl" value="/"/>
 	</bean>
-	
-	<authentication-manager alias="authenticationManager">
-		<authentication-provider ref="authenticationProvider" />
-	</authentication-manager>
 	
 	<!-- 自定义过滤器 -->
 	<bean id="resourcesSecurityInterceptor" class="com.tengfei.attendance.security.ResourcesSecurityInterceptor">

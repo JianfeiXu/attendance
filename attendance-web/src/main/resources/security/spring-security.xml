@@ -4,8 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
-		http://www.springframework.org/schema/security 
-		http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<!-- 配置不过滤的资源（静态资源及登录相关） -->  
 	<http pattern="/**/*.css" security="none"></http>  
@@ -24,7 +23,7 @@
 		<anonymous enabled="false"/>
 		<!-- 退出登录 -->
 		<logout invalidate-session="true" 
-				logout-url="/logout.action" 
+				logout-url="/logout.do" 
 				delete-cookies="JSESSIONID"
 				logout-success-url="/"/> 
 		<!-- 自定义表单验证 -->
@@ -33,4 +32,7 @@
 	    <custom-filter ref="resourcesSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>
     </http>
 
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="authenticationProvider" />
+	</authentication-manager>
 </beans:beans>
