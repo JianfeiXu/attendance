@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import com.tengfei.attendance.dao.UserDao;
 import com.tengfei.attendance.tools.Utility;
+import com.tengfei.attendance.vo.User;
 
 @Repository
 public class UserDaoImpl implements UserDao {

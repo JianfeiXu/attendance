@@ -1,6 +1,6 @@
 package com.tengfei.attendance.service;
 
-import org.springframework.security.core.userdetails.User;
+import com.tengfei.attendance.vo.User;
 
 /**
  * 用户服务

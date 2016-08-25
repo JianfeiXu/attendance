@@ -1,7 +1,10 @@
 package com.tengfei.attendance.security;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,14 +35,17 @@ public class DefaultUserDetailsService implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, LoginAuthenticationException {
-		User user = this.userService.getByUsername(username); //从用户表查找
+		com.tengfei.attendance.vo.User user = this.userService.getByUsername(username); //从用户表查找
 		if (null == user || Utility.isEmpty(user.getUsername())) {
 			if(null == user || Utility.isEmpty(user.getUsername())) {
 				throw new UsernameNotFoundException("用户名或密码不正确!");
 			}
 		}
 		
-		return user;
+		User retUser = new User(user.getUsername(), user.getPassword(), user.isEnabled()
+				, true, true, true, new ArrayList<SimpleGrantedAuthority>(0));
+		
+		return retUser;
     }
 
 }
