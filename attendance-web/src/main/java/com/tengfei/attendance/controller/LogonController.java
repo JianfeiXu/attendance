@@ -53,7 +53,7 @@ public class LogonController {
 		menu.setMenuId("secondMenu_01_01");
 		menu.setMenuName("考勤周期管理");
 		menu.setLeaf(true);
-		menu.setMenuUrl("/attendanceManage/timeManage.do");
+		menu.setMenuUrl("/attendanceManage/periodManage.do");
 		menu.setOrderNum(1);
 		menu = new Menu();
 		secondMenuList.add(menu);
