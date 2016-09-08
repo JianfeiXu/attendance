@@ -5,11 +5,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import com.tengfei.attendance.sys.SysParams;
@@ -44,6 +49,7 @@ public class ParseExcelUtil {
 	
 	protected static List<ClockRecord> parseDDRecordExcel(HSSFSheet sheet) {
 		List<ClockRecord> clockRecordList = new LinkedList<ClockRecord>();
+		Map<String, Integer> ddHeadColIndex = fillDDHeadColIndex(sheet);
 		
 		MergeRegion mergeRegion = null;
 		for(int i = SysParams.ddExcelStartRow, rowCount = sheet.getLastRowNum(); i < rowCount; i++) {
@@ -57,9 +63,39 @@ public class ParseExcelUtil {
 				continue;
 			}
 			
+			ClockRecord clockRecord = new ClockRecord();
+			Row row = sheet.getRow(i);
+			clockRecord.setName(row.getCell(0).getStringCellValue()); //姓名
+			clockRecord.setDepartment(row.getCell(ddHeadColIndex.get("部门")).getStringCellValue()); //部门
+			clockRecord.setDate(row.getCell(ddHeadColIndex.get("日期")).getStringCellValue()); //日期
+			
 		}
 		
 		return clockRecordList;
+	}
+	
+	protected static Map<String, Integer> fillDDHeadColIndex(HSSFSheet sheet) {
+		Iterator<Cell> cellIter = sheet.getRow(SysParams.ddExcelStartRow - 1).cellIterator();
+		Map<String, Integer> ddHeadColIndex = new HashMap<String, Integer>() {
+			private static final long serialVersionUID = 1L;
+
+			{
+//				put("姓名", 0);
+				put("部门", 0);
+				put("日期", 0);
+				put("时间", 0);
+				put("地点", 0);
+			}
+		};
+		
+		while(cellIter.hasNext()) {
+			Cell cell = cellIter.next();
+			if(ddHeadColIndex.containsKey(cell.getStringCellValue())) {
+				ddHeadColIndex.put(cell.getStringCellValue(), cell.getColumnIndex());
+			}
+		}
+		
+		return ddHeadColIndex;
 	}
 	
 	protected static List<ClockRecord> parseCardRecordExcel(HSSFSheet sheet) {
